@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>¡Feliz Cumpleaños Azulcrema!</title>
+
+    <!-- Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle, #002b5c, #00152e);
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            color: white;
+
+            /* 🔥 CORRECCIÓN: permitir scroll */
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        /* Fondo estadio */
+        .estadio {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: url('https://i.imgur.com/vnE7RcR.jpeg');
+            background-size: cover;
+            opacity: 0.2;
+            z-index: -3;
+        }
+
+        .luces {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at center, rgba(255,255,0,0.2), transparent);
+            animation: brillar 5s infinite alternate;
+            z-index: -2;
+        }
+
+        @keyframes brillar {
+            from { opacity: 0.2; }
+            to { opacity: 0.5; }
+        }
+
+        /* Águila volando */
+        .aguila {
+            position: fixed;
+            top: 20%;
+            left: -300px;
+            width: 220px;
+            animation: volar 12s linear infinite;
+            opacity: 0.8;
+            z-index: -1;
+        }
+
+        @keyframes volar {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(110vw); }
+            100% { transform: translateX(0); }
+        }
+
+        .logo {
+            margin-top: 20px;
+            width: 150px;
+            animation: vibrar 2s infinite;
+            position: relative;
+            z-index: 5;
+        }
+
+        @keyframes vibrar {
+            0%,100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin: 20px;
+            text-shadow: 0 0 15px #ffde00;
+            z-index: 5;
+            position: relative;
+        }
+
+        .mensaje {
+            font-size: 1.3rem;
+            width: 90%;
+            max-width: 600px;
+            margin: auto;
+            text-shadow: 0 0 10px black;
+            z-index: 5;
+            position: relative;
+        }
+
+        /* Marco del video */
+        .video-frame {
+            margin: 30px auto;
+
+            /* 🔥 Video más chico centrado */
+            width: 90%;
+            max-width: 500px;
+
+            padding: 10px;
+            border: 4px solid #ffde00;
+            border-radius: 15px;
+            animation: glow 3s infinite alternate;
+
+            position: relative;
+            z-index: 10;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 10px #ffde00; }
+            to   { box-shadow: 0 0 30px #ffde00; }
+        }
+
+        video {
+            width: 100%;
+            border-radius: 10px;
+
+            /* 🔥 Limitar altura para que no se coma la pantalla */
+            max-height: 300px;
+            object-fit: cover;
+        }
+
+        /* Fuegos artificiales */
+        .firework {
+            position: fixed;
+            width: 5px; height: 5px;
+            background: yellow;
+            border-radius: 50%;
+            animation: firework 1.5s ease-out infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes firework {
+            from { transform: scale(1); opacity: 1; }
+            to   { transform: scale(20); opacity: 0; }
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="estadio"></div>
+    <div class="luces"></div>
+    <img class="aguila" src="https://i.imgur.com/fGqNagB.png">
+
+    <!-- Logo -->
+    <img class="logo" src="logo.png">
+
+    <h1>¡Feliz Cumpleaños, Campeón Azulcrema! 🦅💛💙</h1>
+
+    <p class="mensaje">
+        Que este año esté lleno de goles, alegría y muchas victorias como las del América.
+    </p>
+
+    <!-- Video -->
+    <div class="video-frame">
+        <video src="video.mp4" autoplay muted controls></video>
+    </div>
+
+    <!-- Confetti y fuegos artificiales -->
+    <script>
+        setInterval(() => {
+            confetti({
+                particleCount: 50,
+                spread: 120,
+                origin: { y: 0.2 }
+            });
+        }, 2500);
+
+        setInterval(() => {
+            let f = document.createElement('div');
+            f.classList.add('firework');
+            f.style.left = Math.random() * 100 + "vw";
+            f.style.top = Math.random() * 50 + "vh";
+            document.body.appendChild(f);
+            setTimeout(() => f.remove(), 1500);
+        }, 800);
+    </script>
+
+</body>
+</html>
